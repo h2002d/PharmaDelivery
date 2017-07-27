@@ -1,0 +1,26 @@
+﻿@model PharmaDelivery.Models.Drug
+@{
+    ViewBag.Title = "AddDrug";
+
+}
+<h2>AddDrug</h2>
+@using (@Html.BeginForm("SaveDrug", "Home", FormMethod.Post))
+{
+    @Html.TextBoxFor(m=>m.Name, new { @class = "form-control" , @placeholder="Type Name..."})
+    @Html.TextBoxFor(m=>m.Price, new { @class = "form-control", @placeholder = "Type Price..." })
+    
+            @Html.DropDownListFor(m => m.GroupId,
+                                 new SelectList(ViewBag.Groups,
+                                           "id", "Name"),
+                                            "Select Country",
+                                new { @class = "form-control", @onchange = "FillSubGroup()" })
+@Html.DropDownListFor(m => m.SubGroupId,
+                    new SelectList(Enumerable.Empty<SelectListItem>(), "id", "SubGroupName"),
+                    "Select SubGroup",
+                    new { @class = "form-control", @onchange = "FillPreparate()" })
+@Html.DropDownListFor(m => m.PreparateId,
+                    new SelectList(Enumerable.Empty<SelectListItem>(), "id", "PreparateName"),
+                    "Select Preparate",
+                    new { @class = "form-control" })
+    <input type="submit" class="form-control" />
+}

@@ -1,0 +1,25 @@
+﻿@model PharmaDelivery.Models.Preparate
+
+@{
+    ViewBag.Title = "AddPreparate";
+    
+}
+
+<h2>AddPreparate</h2>
+
+@using (@Html.BeginForm("SavePreparate", "Home", FormMethod.Post))
+{
+
+    @Html.DropDownList("GroupId",
+                                 new SelectList(ViewBag.Groups,
+                                           "id", "Name"),
+                                            "Select Country",
+                                new { @class = "form-control", @onchange = "FillSubGroup()" })
+    @Html.DropDownListFor(m => m.SubGroupId,
+                    new SelectList(Enumerable.Empty<SelectListItem>(), "id", "SubGroupName"),
+                    "Select SubGroup",
+                    new { @class = "form-control", @onchange = "FillPreparate()" })
+   @Html.TextBoxFor(m => m.PreparateName, new { @class = "form-control", @placeholder = "Type Name..." })
+
+    <input type="submit" class="form-control" />
+}
